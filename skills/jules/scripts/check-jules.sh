@@ -29,7 +29,7 @@ fi
 REPOS_OUT=$(jules remote list --repo 2>&1)
 EXIT_CODE=$?
 
-if [ $EXIT_CODE -ne 0 ] || echo "$REPOS_OUT" | grep -Eiq "unauthenticated|not logged in|login|token expired|oauth|unauthorized|error:.*auth"; then
+if [ $EXIT_CODE -ne 0 ] || echo "$REPOS_OUT" | grep -Eiq "^(error:|fatal:)|unauthenticated|not logged in|please log in|login required|token expired|unauthorized"; then
   echo "STATUS: AUTH_REQUIRED"
   echo "MESSAGE: Google Jules CLI authentication is missing or expired. Please run 'jules login' in your terminal to authenticate."
   echo "RAW_OUTPUT: ${REPOS_OUT}"

@@ -43,7 +43,7 @@ Write-Output ("WORKING_TREE_CLEAN: " + ([string]::IsNullOrEmpty($gitDirty)))
 $reposOut = & jules remote list --repo 2>&1 | Out-String
 $exitCode = $LASTEXITCODE
 
-if ($exitCode -ne 0 -or $reposOut -match "(?i)(unauthenticated|not logged in|login|token expired|oauth|unauthorized|error:.*auth)") {
+if ($exitCode -ne 0 -or $reposOut -match "(?im)^(error:|fatal:|.*(unauthenticated|not logged in|please log in|login required|token expired|unauthorized))") {
     Write-Output "STATUS: AUTH_REQUIRED"
     Write-Output "MESSAGE: Google Jules CLI authentication is missing or expired. Please run 'jules login' in your terminal to authenticate."
     Write-Output "RAW_OUTPUT: $($reposOut.Trim())"
