@@ -1,0 +1,12 @@
+{
+  "name": "jules",
+  "displayName": "Google Jules",
+  "version": "1.0.0",
+  "description": "Google Jules CLI integration: delegate asynchronous coding tasks to Jules remote cloud VMs, monitor active sessions, and pull or apply finished patches.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Delegate writing unit tests for the current module to Jules in the background",
+    "Check the status of all my active Google Jules remote sessions",
+    "Pull and review the patch from my latest completed Jules session"
+  ]
+}

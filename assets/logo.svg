@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="julesGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="50%" stop-color="#6366F1" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+    <linearGradient id="OctoAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A855F7" />
+      <stop offset="100%" stop-color="#EC4899" />
+    </linearGradient>
+  </defs>
+  <!-- Outer rounded badge with >10% margin (16px margin around 96x96 box) -->
+  <rect x="16" y="16" width="96" height="96" rx="24" fill="url(#julesGrad)" />
+  <!-- Inner terminal/code prompt & async cloud spark -->
+  <path d="M38 48 L54 64 L38 80" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+  <line x1="62" y1="80" x2="86" y2="80" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" />
+  <!-- Sparkle / Agent star -->
+  <path d="M82 36 L85 45 L94 48 L85 51 L82 60 L79 51 L70 48 L79 45 Z" fill="#FDE047" />
+</svg>
