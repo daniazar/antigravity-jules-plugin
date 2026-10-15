@@ -58,17 +58,24 @@ Since Jules works asynchronously in a remote VM without live interactive clarifi
 - **Acceptance Criteria**: Commands Jules should run to verify its work (e.g., `npm test`, `tsc --noEmit`, `pytest`).
 
 ### 2.2 Dispatching the Session
-Always pass `--repo <owner>/<repo>` explicitly (or run from the repository root) so there is no ambiguity:
+Always pass `--repo <owner>/<repo>` explicitly (or run from the repository root) so there is no ambiguity.
+
+> [!IMPORTANT]
+> 1. **Always pipe the prompt via stdin** (`$prompt | jules new ...`) instead of passing it as a positional command-line argument. In non-interactive shells, passing a prompt as an argument without piping stdin causes `jules new` to launch an interactive TUI editor and hang indefinitely!
+> 2. **Run `jules` CLI commands sequentially (never in parallel tool calls).** On Windows, the Node wrapper extracts/spawns `AppData\Local\Temp\jules_tmp\jules.exe`; running two `jules` processes simultaneously causes `ENOENT` / file-locking collisions.
 
 ```powershell
-# Single remote session:
-jules new --repo <owner>/<repo> "<detailed task prompt>"
+# Single remote session (pipe via stdin to avoid interactive TUI hang):
+$prompt = @"
+<detailed task prompt>
+"@
+$prompt | jules new --repo <owner>/<repo>
 
 # Parallel remote sessions (1-5) when exploring multiple solutions or tricky bugs:
-jules new --repo <owner>/<repo> --parallel 3 "<detailed task prompt>"
+$prompt | jules new --repo <owner>/<repo> --parallel 3
 ```
 
-After creating a session, immediately run:
+`jules new` prints the created **Session ID** and URL directly to stdout, and you can also verify active sessions with:
 ```powershell
 jules remote list --session
 ```

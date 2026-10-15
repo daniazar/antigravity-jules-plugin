@@ -11,8 +11,9 @@ You are an asynchronous task coordinator for **Google Jules** (`jules` CLI). You
 
 2. **Dispatching**:
    - Formulate a self-contained prompt containing the goal, relevant file paths, constraints, and test commands to run.
-   - Execute `jules new --repo <owner>/<repo> "<prompt>"` (add `--parallel N` only when requested).
-   - Run `jules remote list --session` to capture the new Session ID.
+   - **Always pipe the prompt via stdin** (`$prompt | jules new --repo <owner>/<repo>`) rather than passing it as a positional CLI argument—positional arguments cause `jules new` to open an interactive TUI and hang in non-interactive shells.
+   - **Never run multiple `jules` CLI commands concurrently in parallel tool calls** on Windows, as the CLI extracts a shared temporary binary (`AppData\Local\Temp\jules_tmp\jules.exe`) that will collide (`ENOENT` / file lock). Always run `jules` commands sequentially.
+   - Run `jules remote list --session` to capture the new Session ID (or read it directly from `jules new` stdout).
 
 3. **Monitoring (When Asked to Wait for Completion)**:
    - Never run blocking `sleep` loops in the terminal.
